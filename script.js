@@ -1,30 +1,32 @@
 //your code here
-let bandNames = ['The Virupaksha Temple', 'Victoria Memorial', 'Tajmahal'];
+let bandNames = ["The Beatles", "Rolling Stones", "Led Zeppelin", "Pink Floyd", "The Who", "The Doors"];
 
-// function to remove articles from the beginning of the string
-function removeArticle(str) {
+// Function to remove articles from band names
+function removeArticle(bandName) {
+  // List of articles to remove
   let articles = ["a", "an", "the"];
-  let words = str.split(" ");
+  // Split band name into words
+  let words = bandName.split(" ");
+  // Check if first word is an article
   if (articles.includes(words[0].toLowerCase())) {
-    return words.slice(1).join(" ");
-  } else {
-    return str;
+    // Remove the article
+    words.shift();
   }
+  // Join the remaining words and return the modified band name
+  return words.join(" ");
 }
 
-// sort the band names in lexicographic order
+// Sort the band names in lexicographic order excluding articles
 bandNames.sort(function(a, b) {
-  a = removeArticle(a);
-  b = removeArticle(b);
-  return a.localeCompare(b);
+  return removeArticle(a).localeCompare(removeArticle(b));
 });
 
-// get the ul element by id
-let ul = document.getElementById("band");
+// Get the ul element with id 'band'
+let ulElement = document.getElementById("band");
 
-// create li elements for each band name and append to ul
+// Loop through the sorted band names and add them as li elements to the ul element
 for (let i = 0; i < bandNames.length; i++) {
-  let li = document.createElement("li");
-  li.textContent = bandNames[i];
-  ul.appendChild(li);
+  let liElement = document.createElement("li");
+  liElement.textContent = bandNames[i];
+  ulElement.appendChild(liElement);
 }
